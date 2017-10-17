@@ -3,9 +3,12 @@ $(function () {
 	////Objects////
 
 	class Pokedex {
-		constructors() {
+		constructor() {
+			this.fave_list = [];
+			this.current_pokemon = null;
 			
-		}//constructors
+		}//constructor
+
 		showDetails(name){
 			cachedFetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
 			.then(r=> r.json())
@@ -17,16 +20,53 @@ $(function () {
 				let weight = results.weight;
 				let typeData = results.types;
 				let types = '<ul>';
+				this.current_pokemon = name;
+
 				for (var i = 0; i < typeData.length; i++) {
-					types += `<li><img src="${typeData[i].type.name}</li>`;
+					types += `<li>${typeData[i].type.name}</li>`;
 				}
 				types += '</ul>';
-
-
-
-				$('#display').append(`<img src="${results.sprites.front_default}"/> <h1>${id} ${name}</h1> <p>Height: ${height}</p> <p>Weight: ${weight}</p> <p>Types: ${types}</p>`);
+				
+				$('#display').html(`
+					<img id="star" class="star" data-name="${name}" src="imgs/star.png"/>
+					<img class="sprite" src="${results.sprites.front_default}"/> 
+					<h1>${id} ${name}</h1> 
+					<p>Height: ${height}</p> 
+					<p>Weight: ${weight}</p> 
+					<p>Types: ${types}</p>
+					`);//end append
+				if (jQuery.inArray(this.current_pokemon, this.fave_list) === -1) {
+					$('#star').attr('src','imgs/star.png');
+				}//if
+				else {
+					$('#star').attr('src','imgs/color_star.png');
+				}
 			});//results
 		}//showDetails
+
+		displayFaves() {
+			var list = '';
+			for (var i = 0; i < this.fave_list.length; i++) {
+				list += `<li>${this.fave_list[i]}</li>`;
+			}//forloop
+			$('#favorites').html(`<ul>${list}</ul>`);
+		}//displayFaves
+
+		addToFaveList() {
+			// var check_list = $(this.fave_list).inArray(this.current_pokemon);
+			if ($.inArray(this.current_pokemon, this.fave_list) === -1) {
+				this.fave_list.push(this.current_pokemon);
+				$('#star').attr('src','imgs/color_star.png');
+			}//if 
+			else {
+				this.fave_list.splice($.inArray(this.current_pokemon, this.fave_list), 1);
+				$('#star').attr('src','imgs/star.png');
+			}//else
+			this.displayFaves();
+		}//addToFaveList
+
+
+
 	}//Pokedex
 
 	var pokedex = new Pokedex();
@@ -42,12 +82,14 @@ $(function () {
 	//display info
 	$(document).on('click', '.pokemon button', function () {
 		var name = $(this).attr('data-name');
-		$('#display').empty();
 		pokedex.showDetails(name);
 	});	
 
 	////Favorite////
-
+	$(document).on('click', '.star', function() {
+		// var pokemon = $(this).attr('data-name');
+		pokedex.addToFaveList();
+	})
 
 
 
@@ -57,7 +99,7 @@ $(function () {
 
 
 
-
+// `<img id="goldStar" class="star" src="https://icon-icons.com/icons2/851/PNG/512/poke_trainer_three_star_icon-icons.com_67512.png"/>`
 
 
 
