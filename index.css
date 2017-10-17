@@ -13,6 +13,8 @@ body {
 	height: 400px;
 	background-color: pink;
 	margin: 0 auto;
+	display: inline-block;
+	vertical-align: top;
 }
 
 li {
@@ -22,4 +24,27 @@ li {
 p {
 	text-align: left;
 	margin-left: 40px;
+}
+
+.favorites {
+	display: inline-block;
+	width: 200px;
+	height: 400px;
+	background-color: teal;
+	vertical-align: top;
+	position: relative;
+	overflow-wrap: break-word;
+	overflow: scroll;
+}
+
+.star {
+	height: 50px;
+	position: relative;
+	top: -40px;
+	left: -120px;
+}
+.sprite {
+	position: relative;
+	right: 25px;
+	top: 30px;
 }
