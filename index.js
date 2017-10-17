@@ -65,12 +65,11 @@ $(function () {
 			this.displayFaves();
 		}//addToFaveList
 
-
-
 	}//Pokedex
 
 	var pokedex = new Pokedex();
 
+	
 	////Click events/////
 	
 	$('#pokeload').on('click', function(){
@@ -85,22 +84,11 @@ $(function () {
 		pokedex.showDetails(name);
 	});	
 
-	////Favorite////
+	//favorite
 	$(document).on('click', '.star', function() {
 		// var pokemon = $(this).attr('data-name');
 		pokedex.addToFaveList();
 	})
-
-
-
-	
-
-
-
-
-
-// `<img id="goldStar" class="star" src="https://icon-icons.com/icons2/851/PNG/512/poke_trainer_three_star_icon-icons.com_67512.png"/>`
-
 
 
 
