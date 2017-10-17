@@ -14,3 +14,12 @@ body {
 	background-color: pink;
 	margin: 0 auto;
 }
+
+li {
+	text-align: left;
+	margin-left: 40px;
+}
+p {
+	text-align: left;
+	margin-left: 40px;
+}
