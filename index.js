@@ -11,19 +11,20 @@ $(function () {
 			.then(r=> r.json())
 			.then(results =>{
 				console.log(results);
-				let s = results.sprites;
 				let id = results.id;
-				let n = results.name;
-				let h = results.height;
-				let w = results.weight;
-				let tArray = [results.type];
-				let t = for (var i = 0; i < rArray.length; i++) {
-							return ${tArray[i]}
-						}//for loop
+				let name = results.name;
+				let height = results.height;
+				let weight = results.weight;
+				let typeData = results.types;
+				let types = '<ul>';
+				for (var i = 0; i < typeData.length; i++) {
+					types += `<li><img src="${typeData[i].type.name}</li>`;
+				}
+				types += '</ul>';
 
 
 
-				$('#display').append(`<img src="${s}"/> <h1>${id} ${n}</h1> <p>Height: ${h}</p> <p>Weight: ${w}</p> <p>Types: ${t}</p>`);
+				$('#display').append(`<img src="${results.sprites.front_default}"/> <h1>${id} ${name}</h1> <p>Height: ${height}</p> <p>Weight: ${weight}</p> <p>Types: ${types}</p>`);
 			});//results
 		}//showDetails
 	}//Pokedex
@@ -38,11 +39,14 @@ $(function () {
 		}//for loop
 	});//pokelist/function
 
+	//display info
 	$(document).on('click', '.pokemon button', function () {
 		var name = $(this).attr('data-name');
+		$('#display').empty();
 		pokedex.showDetails(name);
-	});//test function
+	});	
 
+	////Favorite////
 
 
 
