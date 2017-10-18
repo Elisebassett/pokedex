@@ -9,6 +9,7 @@ $(function () {
 			
 		}//constructor
 
+		/////////Pokemon Display///////////
 		showDetails(name){
 			cachedFetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
 			.then(r=> r.json())
@@ -29,7 +30,16 @@ $(function () {
 				
 				$('#display').html(`
 					<img id="star" class="star" data-name="${name}" src="imgs/star.png"/>
-					<img class="sprite" src="${results.sprites.front_default}"/> 
+					<div class = "sprite_display">
+						<img class="sprite" src="${results.sprites.front_default}"/> 
+						<img class="sprite" src="${results.sprites.back_default}"/> 
+						<img class="sprite" src="${results.sprites.front_female}"/> 
+						<img class="sprite" src="${results.sprites.back_female}"/> 
+						<img class="sprite" src="${results.sprites.front_shiny}"/> 
+						<img class="sprite" src="${results.sprites.back_shiny}"/> 
+						<img class="sprite" src="${results.sprites.front_shiny_female}"/> 
+						<img class="sprite" src="${results.sprites.back_shiny_female}"/> 
+					</div>
 					<h1>${id} ${name}</h1> 
 					<p>Height: ${height}</p> 
 					<p>Weight: ${weight}</p> 
@@ -44,10 +54,12 @@ $(function () {
 			});//results
 		}//showDetails
 
+
+		/////////Favorite list///////////
 		displayFaves() {
 			var list = '';
 			for (var i = 0; i < this.fave_list.length; i++) {
-				list += `<li>${this.fave_list[i]}</li>`;
+				list += `<li class="fave" draggable="true" ondragstart="event.dataTransfer.setData('text/html', '${this.fave_list[i]}');">${this.fave_list[i]}</li>`;
 			}//forloop
 			$('#favorites').html(`<ul>${list}</ul>`);
 		}//displayFaves
@@ -65,21 +77,25 @@ $(function () {
 			this.displayFaves();
 		}//addToFaveList
 
-
-
 	}//Pokedex
 
 	var pokedex = new Pokedex();
 
-	////Click events/////
+	//////////////////Drag and Drop Functions//////////////////////
 	
+
+
+	
+
+	//////////////////Click events//////////////////////
+	////Load Pokemon////
 	$('#pokeload').on('click', function(){
 		for (var i = 0; i < pokemonArray.length; i++) {
 			$('#pokelist').append(`<button id="${pokemonArray[i]}" data-name="${pokemonArray[i]}">${pokemonArray[i]}</button>`);
 		}//for loop
 	});//pokelist/function
 
-	//display info
+	////Display info////
 	$(document).on('click', '.pokemon button', function () {
 		var name = $(this).attr('data-name');
 		pokedex.showDetails(name);
@@ -99,8 +115,16 @@ $(function () {
 
 
 
-// `<img id="goldStar" class="star" src="https://icon-icons.com/icons2/851/PNG/512/poke_trainer_three_star_icon-icons.com_67512.png"/>`
+// var drag_element = null;
 
+// 	function dragFave(e) {
+// 		drag_element = this;
+// 		e.dataTransfer.effectAllowed = 'move';
+// 		e.dataTransfer.setData('text/html', this.outerHTML);
+
+// 		this.classList.add('dragElem');
+
+// 	}//dragFave
 
 
 

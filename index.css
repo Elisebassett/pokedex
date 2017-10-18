@@ -11,10 +11,11 @@ body {
 .pokedex {
 	width: 400px;
 	height: 400px;
-	background-color: pink;
+	background-color: white;
 	margin: 0 auto;
 	display: inline-block;
 	vertical-align: top;
+	border: solid 5px red;
 }
 
 li {
@@ -29,8 +30,8 @@ p {
 .favorites {
 	display: inline-block;
 	width: 200px;
-	height: 400px;
-	background-color: teal;
+	height: 410px;
+	background-color: red;
 	vertical-align: top;
 	position: relative;
 	overflow-wrap: break-word;
@@ -40,11 +41,23 @@ p {
 .star {
 	height: 50px;
 	position: relative;
-	top: -40px;
-	left: -120px;
+	top: 5px;
+	right: 170px;
 }
-.sprite {
+.sprite_display {
 	position: relative;
-	right: 25px;
-	top: 30px;
+	left: 10px;
+	bottom: 15px;
+	height: 100px;
+	width: 380px;
+	text-align: center;
+	overflow: scroll;
+}
+.pokemon {
+	margin: 10px
+}
+
+.sprite img{
+	display: inline-block;
+	vertical-align: top;
 }
