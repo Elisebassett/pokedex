@@ -27,25 +27,26 @@ $(function () {
 					types += `<li>${typeData[i].type.name}</li>`;
 				}
 				types += '</ul>';
+				var {sprites} = results;
 				
 				$('#display').html(`
 					<img id="star" class="star" data-name="${name}" src="imgs/star.png"/>
 					<div class = "sprite_display">
-						<img class="sprite" src="${results.sprites.front_default}"/> 
-						<img class="sprite" src="${results.sprites.back_default}"/> 
-						<img class="sprite" src="${results.sprites.front_female}"/> 
-						<img class="sprite" src="${results.sprites.back_female}"/> 
-						<img class="sprite" src="${results.sprites.front_shiny}"/> 
-						<img class="sprite" src="${results.sprites.back_shiny}"/> 
-						<img class="sprite" src="${results.sprites.front_shiny_female}"/> 
-						<img class="sprite" src="${results.sprites.back_shiny_female}"/> 
+						<img class="sprite" src="${(sprites.front_default !== null ? sprites.front_default : '')}"/> 
+						<img class="sprite" src="${(sprites.back_default !== null ? sprites.back_default  : '')}"/> 
+						<img class="sprite" src="${(sprites.front_female !== null ? sprites.front_female : '')}"/> 
+						<img class="sprite" src="${(sprites.back_female !== null ? sprites.back_female : '')}"/> 
+						<img class="sprite" src="${(sprites.front_shiny !== null ? sprites.front_shiny : '')}"/> 
+						<img class="sprite" src="${(sprites.back_shiny !== null ? sprites.back_shiny : '')}"/> 
+						<img class="sprite" src="${(sprites.front_shiny_female !== null ? sprites.front_shiny_female : '')}"/> 
+						<img class="sprite" src="${(sprites.back_shiny_female !== null ? sprites.back_shiny_female : '')}"/> 
 					</div>
 					<h1>${id} ${name}</h1> 
 					<p>Height: ${height}</p> 
 					<p>Weight: ${weight}</p> 
 					<p>Types: ${types}</p>
 					`);//end append
-				if (jQuery.inArray(this.current_pokemon, this.fave_list) === -1) {
+				if ($.inArray(this.current_pokemon, this.fave_list) === -1) {
 					$('#star').attr('src','imgs/star.png');
 				}//if
 				else {
@@ -65,7 +66,6 @@ $(function () {
 		}//displayFaves
 
 		addToFaveList() {
-			// var check_list = $(this.fave_list).inArray(this.current_pokemon);
 			if ($.inArray(this.current_pokemon, this.fave_list) === -1) {
 				this.fave_list.push(this.current_pokemon);
 				$('#star').attr('src','imgs/color_star.png');
@@ -82,8 +82,7 @@ $(function () {
 	var pokedex = new Pokedex();
 
 	//////////////////Drag and Drop Functions//////////////////////
-	
-
+	$(document).ondragstart
 
 	
 
